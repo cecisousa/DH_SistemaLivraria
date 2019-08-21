@@ -6,32 +6,37 @@ import java.util.Scanner;
 
 public class Vendedor {
 
-    private ArrayList<Livro> livrosCadastrados = new ArrayList<>();
+    private List<Livro> livrosCadastrados = new ArrayList<>();
 
     public void cadastraLivro(Livro umLivro) {
         livrosCadastrados.add(umLivro);
         System.out.println("Cadastro realizado!");
     }
 
-//    public void consultaLivro(String codigo){
-//        for (int i = 0; i < livrosCadastrados.size(); i++) {
-//            if (codigo.contains(livrosCadastrados)){
-//                System.out.println(i);
-//            }
-//        }
-//    }
-    public void consultarLivro(Livro livro){
-        if(livrosCadastrados.contains(livro)){
-            System.out.println("O livro está listado.");
-        }else{
-            System.out.println("O Livro não foi encontrado");
+    public void consultaCodigo(String codigo){
+        for (int i = 0; i < livrosCadastrados.size(); i++) {
+            if (livrosCadastrados.get(i).getCodigo().equals(codigo)){
+                System.out.println("Livro disponível! " + livrosCadastrados.get(i).toString());
+                return;
+            }
         }
+        System.out.println("Livro não encontrado, que pena!");
     }
 
-    public void efetuaVenda(Livro livro){
-//        fazer if else de qtidade, subtraindo
+    public void efetuaVenda(String codigo){
+        for (int i = 0; i < livrosCadastrados.size(); i++) {
+            if(livrosCadastrados.get(i).getCodigo().equals(codigo)){
+                if(livrosCadastrados.get(i).getQtdEstoque() > 0){
+                    livrosCadastrados.get(i).tiraDoEstoque();
+                    System.out.println("Compra efetuada!");
+                } else {
+                    System.out.println("Estoque esgotado, volte semana que vem!");
+                }
+                return;
+            }
+        }
+        System.out.println("Desculpe, não trabalhamos com esse livro.");
     }
-
 }
 
 

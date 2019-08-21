@@ -24,6 +24,10 @@ public class Livro {
         preco = novoPreco;
     }
 
+    public void tiraDoEstoque(){
+        qtdEstoque -= 1;
+    }
+
     @Override
     public String toString() {
         return "Livro{" +
